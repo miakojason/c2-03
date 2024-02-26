@@ -1,3 +1,8 @@
+<style>
+    .title {
+        cursor: pointer;
+    }
+</style>
 <fieldset>
     <legend>目前位置:首頁>最新文章區</legend>
     <table>
@@ -16,9 +21,9 @@
         foreach ($news as $new) {
         ?>
             <tr>
-                <td class="clo title" data-id="<?= $new['id']; ?>"><?= $new['title']; ?></td>
+                <td class="title clo" data-id="<?= $new['id']; ?>"><?= $new['title']; ?></td>
                 <td>
-                    <div id="s<?= $new['id']; ?>"><?= mb_substr($new['text'], 0, 25); ?>...</div>
+                    <div id="s<?= $new['id']; ?>"><?= mb_substr($new['text'], 0, 20); ?>...</div>
                     <div id="a<?= $new['id']; ?>" style="display: none;"><?= $new['text']; ?></div>
                 </td>
                 <td>
@@ -37,7 +42,7 @@
         }
         ?>
     </table>
-    <div>
+    <div class="ct">
         <?php
         if ($now > 1) {
             $prev = $now - 1;
@@ -45,7 +50,7 @@
         }
         for ($i = 1; $i <= $pages; $i++) {
             $fontsize = ($now == $i) ? '24px' : '16px';
-            echo "<a href='?do=$do&p=$i'style='font-size:$fontsize'>$i</a>";
+            echo "<a href='?do=$do&p=$i' style='font-size:$fontsize'>$i</a>";
         }
         if ($now < $pages) {
             $next = $now + 1;
@@ -56,12 +61,13 @@
 </fieldset>
 <script>
     $(".title").on('click', (e) => {
-        let id = $(e.target).data('id')
-        $(`#s${id},#a${id}`).toggle()
+        let id = $(e.target).data('id');
+        $(`#s${id},#a${id}`).toggle();
     })
-    function good(news) {
+
+    function good(newsid) {
         $.post("./api/good.php", {
-            news
+            newsid
         }, () => {
             location.reload();
         })
