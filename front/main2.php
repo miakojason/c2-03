@@ -1,9 +1,9 @@
 <style>
-    .tags{
+    .tags {
         display: flex;
     }
     section{
-        display: none;
+        display:none;
     }
     .active{
         background-color: white;
@@ -11,10 +11,10 @@
 </style>
 <fieldset>
     <div class="tags">
-        <div class="clo tag active" id="sec01" >健康新知</div>
-        <div class="clo tag" id="sec02">菸害防制</div>
-        <div class="clo tag" id="sec03">癌症防治</div>
-        <div class="clo tag" id="sec04">慢性病防治</div>
+        <div class="tag clo active" id="sec01">健康新知</div>
+        <div class="tag clo" id="sec02">菸害防治</div>
+        <div class="tag clo" id="sec03">癌症防治</div>
+        <div class="tag clo" id="sec04">慢性病防治</div>
     </div>
     <article>
         <section id="section01" style="display:block">
@@ -38,7 +38,7 @@
     民眾對運動如有疑問，可參考國民健康局肥胖防治網-「快樂動」(http://obesity.bhp.gov.tw)，亦可撥打免費市話健康體重管理電話諮詢服務，諮詢專線「0800-367-100（0800-瘦落去-要動動）」，也可利用國民健康局局網首頁或肥胖防治網問題諮詢專區的網路電話撥入功能，向客服人員諮詢關於運動、健康飲食及健康體重管理等相關疑問。</pre>
         </section>
         <section id="section02">
-            <h3>菸害防制</h3>
+            <h3>菸害防治</h3>
             <pre>菸害防治法規
 第二十三條　　違反第五條或第十條第一項規定者，處新臺幣一萬元以上五萬元以下罰鍰，並得按次連續處罰。
 第二十四條　　製造或輸入違反第六條第一項、第二項或第七條第一項規定之菸品者，處新臺幣一百萬元以上五百萬元以下罰鍰，並令限期回收；屆期未回收者，按次連續處罰，違規之菸品沒入並銷毀之。
@@ -66,7 +66,8 @@
             <pre>降低罹癌風險 建構健康生活型態
 癌症防治   三管齊下  Part 1 降低罹癌風險建構健康生活型態 
 
-撰文：徐文媛　諮詢對象：衛生署國民健康局副局長id
+撰文：徐文媛　諮詢對象：衛生署國民健康局副局長趙坤郁 
+
 致癌的因素很多，而且往往就存在於我們周遭環境及日常生活中。唯有正常飲食、適當運動、遠離致癌因子、養成健康行為與生活習慣，並改善生活環境品質，才能減少罹癌的危機。
 形塑健康生活新價值觀
 「健康生活型態」牽涉的範圍很廣，衛生署國民健康局副局長趙坤郁表示，做為國家癌症防治政策的一環，應優先選擇具實證研究基礎的指標，所以健康飲食、菸害防制、檳榔防制及建立運動習慣，都是目前積極推動的衛生政策。
@@ -106,13 +107,14 @@
 如果民眾發現自己解尿不舒服時，一定要在第一時間就診，讓醫師採用檢體對症下藥，只要沒有其他的特殊問題併存，同時能接受完整療程的抗生素治療，通常一星期左右即可痊癒。不過服藥的時間及用量絕對要遵照醫師囑咐，如果自行隨意停藥或不按時服用，很可能會造成殘存的細菌出現抗藥性，非但原本的症狀無法痊癒，還可能帶來慢性泌尿道發炎、尿路結石、腎臟功能受損等併發症，千萬要特別注意。</pre>
         </section>
     </article>
+
 </fieldset>
 <script>
-    $(".tag").on('click',function(){
-        $(".tag").removeClass('active')
-        $(this).addClass("active")
-        let id=$(this).attr('id').replace("sec","section");
-        $("section").hide()
-        $("#"+id).show()
+    $(".tag").on('click', function() {
+      $(".tag").removeClass('active')
+      $(this).addClass('active')
+      let id=$(this).attr('id').replace("sec","section")
+      $("section").hide()
+        $("#" +id ).show();
     })
 </script>
