@@ -7,7 +7,12 @@
             <th></th>
         </tr>
         <?php
-        $news = $News->all();
+        $total = $News->count(['sh' => 1]);
+        $div = 5;
+        $pages = ceil($total / $div);
+        $now = $_GET['p'] ?? 1;
+        $start = ($now - 1) * $div;
+        $news = $News->all(" limit $start,$div");
         foreach ($news as $new) {
         ?>
             <tr>
@@ -19,7 +24,7 @@
                 <td>
                     <?php
                     if (isset($_SESSION)) {
-                        
+
                         echo "讚";
                     } else {
                         echo "收回讚";
@@ -31,4 +36,23 @@
         }
         ?>
     </table>
+    <div>
+        <?php
+        if ($now > 1) {
+            $prev = $now - 1;
+            echo "<a href='?do=$do&p=$prev'><</a>";
+        }
+        for ($i = 1; $i <= $pages; $i++) {
+            $fontsize = ($now == $i) ? '24px' : '16px';
+            echo "<a href='?do=$do&p=$i'style='font-size:$fontsize'>$i</a>";
+        }
+        if ($now < $pages) {
+            $next = $now + 1;
+            echo "<a href='?do=$do&p=$next'>></a>";
+        }
+        ?>
+    </div>
 </fieldset>
+<script>
+    
+</script>
