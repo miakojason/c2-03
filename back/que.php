@@ -1,6 +1,6 @@
 <fieldset>
     <legend>新增問卷</legend>
-    <form action="./api/que.php" method="post">
+    <form action="./api/add_que.php" method="post">
         <div style="display: flex;">
             <div class="clo">問卷名稱</div>
             <input type="text" name="subject" id="">
@@ -18,9 +18,9 @@
 </fieldset>
 <script>
     function more() {
-        let opt = `<div">
+        let opt = `<div>
     選項<input type="text" name="option[]" id="">
-    </div><br>`
+    </div>`
         $(".opt").before(opt)
     }
 </script>
