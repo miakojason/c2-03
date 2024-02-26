@@ -1,32 +1,41 @@
 <style>
-    .title {
-        cursor: pointer;
+    .pop {
+        background: rgba(51, 51, 51, 0.8);
+        color: #FFF;
+        min-height: 100px;
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        display: none;
+        z-index: 9999;
+        overflow: auto;
     }
 </style>
 <fieldset>
-    <legend>目前位置:首頁>最新文章區</legend>
+    <legend>目前位置:首頁>人氣文章區</legend>
     <table>
         <tr>
             <th>標題</th>
             <th>內容</th>
-            <th></th>
+            <th>人氣</th>
         </tr>
         <?php
-        $total = $News->count(['sh' => 1]);
+        $total = $News->count();
         $div = 5;
         $pages = ceil($total / $div);
         $now = $_GET['p'] ?? 1;
         $start = ($now - 1) * $div;
-        $news = $News->all(['sh' => 1], " limit $start,$div");
+        $news = $News->all("  order by `good` desc limit $start,$div");
         foreach ($news as $new) {
         ?>
             <tr>
-                <td class="title clo" data-id="<?= $new['id']; ?>"><?= $new['title']; ?></td>
+                <td class="clo title" data-id="<?= $new['id']; ?>"><?= $new['title']; ?></td>
                 <td>
-                    <div id="s<?= $new['id']; ?>"><?= mb_substr($new['text'], 0, 20); ?>...</div>
-                    <div id="a<?= $new['id']; ?>" style="display: none;"><?= $new['text']; ?></div>
+                    <div id="s<?= $new['id']; ?>"><?= mb_substr($new['text'], 0, 25); ?>...</div>
+                    <div class="pop" id="a<?= $new['id']; ?>" style="display: none;"><h3 style="color:aqua;"><?=$new['title']?></h3><?= $new['text']; ?></div>
                 </td>
                 <td>
+                    <?= $new['good']; ?>個人說<img src="./icon/02B03.jpg" style="width:20px">
                     <?php
                     if (isset($_SESSION['user'])) {
                         if ($Log->count(['news' => $new['id'], 'acc' => $_SESSION['user']]) > 0) {
@@ -42,7 +51,7 @@
         }
         ?>
     </table>
-    <div class="ct">
+    <div>
         <?php
         if ($now > 1) {
             $prev = $now - 1;
@@ -50,7 +59,7 @@
         }
         for ($i = 1; $i <= $pages; $i++) {
             $fontsize = ($now == $i) ? '24px' : '16px';
-            echo "<a href='?do=$do&p=$i' style='font-size:$fontsize'>$i</a>";
+            echo "<a href='?do=$do&p=$i'style='font-size:$fontsize'>$i</a>";
         }
         if ($now < $pages) {
             $next = $now + 1;
@@ -60,14 +69,17 @@
     </div>
 </fieldset>
 <script>
-    $(".title").on('click', (e) => {
-        let id = $(e.target).data('id');
-        $(`#s${id},#a${id}`).toggle();
+    $(".title").hover(function() {
+        $(".pop").hide();
+        let id = $(this).data('id');
+        $("#a" + id).show();
     })
 
-    function good(newsid) {
+
+
+    function good(news) {
         $.post("./api/good.php", {
-            newsid
+            news
         }, () => {
             location.reload();
         })
