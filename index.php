@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<?php include_once "./api/db.php";?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0039) -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -17,7 +18,10 @@
 	</div>
 	<div id="all">
 		<div id="title">
-			00 月 00 號 Tuesday | 今日瀏覽: 1 | 累積瀏覽: 36 </div>
+			<?=date("m月d號l")?>|
+			 今日瀏覽: <?=$Total->find(['date'=>date('Y-m-d')])['total'];?> | 
+			 累積瀏覽: <?=$Total->sum('total');?> 
+			</div>
 		<div id="title2">
 
 		</div>
