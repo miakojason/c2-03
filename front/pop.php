@@ -7,15 +7,28 @@
             <th></th>
         </tr>
         <?php
-$news=$News->all();
-foreach($news as $new){
-    
-}
+        $news = $News->all();
+        foreach ($news as $new) {
         ?>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+            <tr>
+                <td class="clo"><?= $new['title']; ?></td>
+                <td>
+                    <div id="a"><?= mb_substr($new['text'], 0, 25); ?>...</div>
+                    <div id="s" style="display: none;"><?= $new['text']; ?></div>
+                </td>
+                <td>
+                    <?php
+                    if (isset($_SESSION)) {
+                        
+                        echo "讚";
+                    } else {
+                        echo "收回讚";
+                    }
+                    ?>
+                </td>
+            </tr>
+        <?php
+        }
+        ?>
     </table>
 </fieldset>
