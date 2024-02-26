@@ -5,4 +5,4 @@ $Que->save($opt);
 $sub = $Que->find($opt['subject_id']);
 $sub['vote']++;
 $Que->save($sub);
-to("../back.php?do=result&id={$sub['id']}");
+to("../index.php?do=result&id={$sub['id']}");
